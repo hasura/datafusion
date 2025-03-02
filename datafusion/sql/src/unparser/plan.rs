@@ -748,10 +748,10 @@ impl Unparser<'_> {
 
                 Ok(())
             }
-            LogicalPlan::Window(window) => {
+            LogicalPlan::Window(_) => {
                 // Window nodes are handled simultaneously with Projection nodes
                 self.select_to_sql_recursively(
-                    window.input.as_ref(),
+                    &plan,
                     query,
                     select,
                     relation,
