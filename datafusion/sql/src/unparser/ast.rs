@@ -20,7 +20,7 @@ use core::fmt;
 use sqlparser::ast;
 use sqlparser::ast::helpers::attached_token::AttachedToken;
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct QueryBuilder {
     with: Option<ast::With>,
     body: Option<Box<ast::SetExpr>>,
@@ -121,7 +121,7 @@ impl Default for QueryBuilder {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct SelectBuilder {
     distinct: Option<ast::Distinct>,
     top: Option<ast::Top>,
@@ -292,7 +292,7 @@ impl Default for SelectBuilder {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct TableWithJoinsBuilder {
     relation: Option<RelationBuilder>,
     joins: Vec<ast::Join>,
@@ -339,13 +339,13 @@ impl Default for TableWithJoinsBuilder {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct RelationBuilder {
     relation: Option<TableFactorBuilder>,
 }
 
 #[allow(dead_code)]
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 enum TableFactorBuilder {
     Table(TableRelationBuilder),
     Derived(DerivedRelationBuilder),
@@ -414,7 +414,7 @@ impl Default for RelationBuilder {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct TableRelationBuilder {
     name: Option<ast::ObjectName>,
     alias: Option<ast::TableAlias>,
@@ -484,7 +484,7 @@ impl Default for TableRelationBuilder {
         Self::create_empty()
     }
 }
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct DerivedRelationBuilder {
     lateral: Option<bool>,
     subquery: Option<Box<ast::Query>>,
@@ -534,7 +534,7 @@ impl Default for DerivedRelationBuilder {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct UnnestRelationBuilder {
     pub alias: Option<ast::TableAlias>,
     pub array_exprs: Vec<ast::Expr>,
