@@ -322,7 +322,7 @@ impl Unparser<'_> {
         }
     }
 
-    fn select_to_sql_recursively(
+    pub fn select_to_sql_recursively(
         &self,
         plan: &LogicalPlan,
         query: &mut Option<QueryBuilder>,
